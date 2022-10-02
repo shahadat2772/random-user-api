@@ -65,7 +65,7 @@ module.exports.saveUser = (req, res, next) => {
 
 module.exports.updateUser = (req, res, next) => {
   const updatedInfo = req.body;
-  const id = updatedInfo.id;
+  const id = updatedInfo?.id;
 
   fs.readFile("./users.json", (err, data) => {
     if (err) {
@@ -74,10 +74,11 @@ module.exports.updateUser = (req, res, next) => {
         .send({ success: false, message: "Internal server error." });
     } else {
       const users = JSON.parse(data);
-      const targetUser = users.find((usr) => usr.id == id);
 
+      const targetUser = users.find((usr) => usr.id == id);
       if (!targetUser) {
         res.status(400).send({ success: false, message: "Invalid user id." });
+        return;
       }
 
       let updatedUsers = [...users];

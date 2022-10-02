@@ -47,7 +47,7 @@ router
    *
    * @apiBody  {id: integer, key: value}
    *
-   * @apiSuccess {success: true, message: ""}
+   * @apiSuccess {success: true, message: "Users info updated successfully"}
    *
    * @apiErr {success:false, message: "Internal Error"}
    * @apiErr {success:false, message: "Invalid user id"}
@@ -61,7 +61,7 @@ router
    *
    * @apiBody  [{id: integer, key: value},{id: integer, key: value}, {id: integer, key: value}]
    *
-   * @apiSuccess {success: true, message: ""}
+   * @apiSuccess {success: true, message: "Users info updated successfully"}
    *
    * @apiErr {success:false, message: "Internal Error"}
    * @apiErr {success:false, message: "Invalid body input"}
@@ -70,12 +70,12 @@ router
 
 router
   /**
-   * @api {patch}
-   * @apiDescription Update multiple users info
+   * @api {delete}
+   * @apiDescription Delete a user by id
    *
-   * @apiBody  [{id: integer, key: value},{id: integer, key: value}, {id: integer, key: value}]
+   * @apiBody  {id:integer}
    *
-   * @apiSuccess {success: true, message: ""}
+   * @apiSuccess {success: true, message: "Successfully updated users info."}
    *
    * @apiErr {success:false, message: "Internal Error"}
    * @apiErr {success:false, message: "Invalid body input"}
