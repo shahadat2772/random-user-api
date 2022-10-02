@@ -148,8 +148,9 @@ module.exports.bulkUpdate = (req, res, next) => {
 module.exports.deleteUser = (req, res, next) => {
   const { id } = req.body;
 
-  if (isNaN(id)) {
-    res.status(400).send({ success: false, message: "Invalid id user id" });
+  if (!id || isNaN(id)) {
+    res.status(400).send({ success: false, message: "Invalid id user id." });
+    return;
   }
 
   fs.readFile("./users.json", (err, data) => {
@@ -160,7 +161,10 @@ module.exports.deleteUser = (req, res, next) => {
 
       const targetUser = users.find((usr) => usr.id == id);
       if (!targetUser) {
-        res.status(400).send({ success: false, message: "Invalid id user id" });
+        res
+          .status(400)
+          .send({ success: false, message: "Invalid id user id." });
+        return;
       }
       const newUsers = users.filter((user) => user.id != id);
 
