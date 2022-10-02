@@ -37,10 +37,7 @@ router
    * @apiSuccess {success: true, message:""}
    *
    * @apiErr {success:false, message: "Internal Error"}
-   * @apiErr {
-  "success": false,
-  "message": "Required properties are missing in user info."
-}
+   * @apiErr { "success": false, "message": "Required properties are missing in user info."}
    */
   .post("/save", userControllers.saveUser);
 
