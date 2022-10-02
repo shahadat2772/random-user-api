@@ -61,3 +61,83 @@ module.exports.saveUser = (req, res, next) => {
     }
   });
 };
+
+module.exports.updateUser = (req, res, next) => {
+  const updatedInfo = req.body;
+  const id = updatedInfo.id;
+
+  fs.readFile("./users.json", (err, data) => {
+    if (err) {
+      res
+        .status(500)
+        .send({ success: false, message: "Internal server error." });
+    } else {
+      const users = JSON.parse(data);
+      const targetUser = users.find((usr) => usr.id == id);
+
+      if (!targetUser) {
+        res.status(400).send({ success: false, message: "Invalid user id." });
+      }
+
+      let updatedUsers = [...users];
+      users.forEach((user, index) => {
+        if (user.id == id) {
+          const updatedUser = Object.assign(user, updatedInfo);
+          updatedUsers[index] = updatedUser;
+        }
+      });
+      fs.writeFile("users.json", JSON.stringify(updatedUsers), (err) => {
+        if (err) {
+          res
+            .status(500)
+            .send({ success: false, message: "Internal server error" });
+        } else {
+          res.status(200).send({
+            success: true,
+            message: "Users info updated successfully",
+          });
+        }
+      });
+    }
+  });
+};
+
+module.exports.bulkUpdate = (req, res, next) => {
+  const updatedInfo = req.body;
+  const id = updatedInfo.id;
+
+  fs.readFile("./users.json", (err, data) => {
+    if (err) {
+      res
+        .status(500)
+        .send({ success: false, message: "Internal server error." });
+    } else {
+      const users = JSON.parse(data);
+      const targetUser = users.find((usr) => usr.id == id);
+
+      if (!targetUser) {
+        res.status(400).send({ success: false, message: "Invalid user id." });
+      }
+
+      let updatedUsers = [...users];
+      users.forEach((user, index) => {
+        if (user.id == id) {
+          const updatedUser = Object.assign(user, updatedInfo);
+          updatedUsers[index] = updatedUser;
+        }
+      });
+      fs.writeFile("users.json", JSON.stringify(updatedUsers), (err) => {
+        if (err) {
+          res
+            .status(500)
+            .send({ success: false, message: "Internal server error" });
+        } else {
+          res.status(200).send({
+            success: true,
+            message: "Users info updated successfully",
+          });
+        }
+      });
+    }
+  });
+};

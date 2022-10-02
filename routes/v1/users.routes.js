@@ -38,7 +38,35 @@ router
    *
    * @apiErr {success:false, message: "Internal Error"}
    */
-  .get("/save", userControllers.saveUser);
+  .post("/save", userControllers.saveUser);
+
+router
+  /**
+   * @api {post}
+   * @apiDescription Update a user
+   *
+   * @apiBody  {id: integer, key: value}
+   *
+   * @apiSuccess {success: true, message: ""}
+   *
+   * @apiErr {success:false, message: "Internal Error"}
+   * @apiErr {success:false, message: "Invalid user id"}
+   */
+  .patch("/update", userControllers.updateUser);
+
+router
+  /**
+   * @api {post}
+   * @apiDescription Update a user
+   *
+   * @apiBody  {id: integer, key: value}
+   *
+   * @apiSuccess {success: true, message: ""}
+   *
+   * @apiErr {success:false, message: "Internal Error"}
+   * @apiErr {success:false, message: "Invalid user id"}
+   */
+  .patch("/update", userControllers.bulkUpdate);
 
 module.exports = router;
 
