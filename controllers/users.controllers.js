@@ -37,13 +37,18 @@ module.exports.getAllUsers = (req, res, next) => {
         .status(500)
         .send({ success: false, message: "Internal server error" });
     } else {
-      users = JSON.parse(data);
-      const limit = req.query.limit;
-      const limitedUsers = users.splice(0, Number(limit));
+      const foundUsers = JSON.parse(data);
+      const limit = req.query?.limit;
+      let users;
+      if (limit) {
+        limitedUsers = foundUsers.splice(0, Number(limit));
+      } else {
+        users = foundUsers;
+      }
       res.status(200).send({
         success: true,
         message: "Success",
-        data: limitedUsers,
+        data: users,
       });
     }
   });
@@ -55,12 +60,10 @@ module.exports.saveUser = async (req, res, next) => {
   try {
     parsedUser = await userSchema.validate(user);
   } catch (error) {
-    res
-      .status(400)
-      .send({
-        success: false,
-        message: "Required properties are missing in user info.",
-      });
+    res.status(400).send({
+      success: false,
+      message: "Required properties are missing in user info.",
+    });
     return;
   }
 
