@@ -7,8 +7,23 @@ router
    * @api {get} / gets a random user
    * @apiDescription Get all the tools
    * @apiSuccess {success: true/false, message:"", data:{}}
+   *
+   * @apiErr {success:false, message: "Internal Error"}
    */
   .get("/random", userControllers.getRandomUser);
+
+router
+  /**
+   * @api {get} / Get multiple users by limit
+   * @apiDescription Get multiple users by limit
+   *
+   * @apiQueryParams {limit{1-}}
+   *
+   * @apiSuccess {success: true, message:"success", data:[]}
+   *
+   * @apiErr {success:false, message: "Internal Error"}
+   */
+  .get("/all", userControllers.getAllUsers);
 
 module.exports = router;
 
