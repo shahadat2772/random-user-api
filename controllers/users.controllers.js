@@ -1,4 +1,15 @@
 const fs = require("fs");
+const { object, string, number } = require("yup");
+// const { number } = require("yup/lib/locale");
+
+let userSchema = object({
+  id: number().required().positive().integer(),
+  gender: string().required(),
+  name: string().required(),
+  contact: string().required(),
+  address: string().required(),
+  photoUrl: string().required(),
+});
 
 module.exports.getRandomUser = (req, res, next) => {
   fs.readFile("./users.json", (err, data) => {
@@ -38,8 +49,20 @@ module.exports.getAllUsers = (req, res, next) => {
   });
 };
 
-module.exports.saveUser = (req, res, next) => {
+module.exports.saveUser = async (req, res, next) => {
   const user = req.body;
+  let parsedUser;
+  try {
+    parsedUser = await userSchema.validate(user);
+  } catch (error) {
+    res
+      .status(400)
+      .send({
+        success: false,
+        message: "Required properties are missing in user info.",
+      });
+    return;
+  }
 
   fs.readFile("./users.json", (err, data) => {
     if (err) {
@@ -48,7 +71,7 @@ module.exports.saveUser = (req, res, next) => {
         .send({ success: false, message: "Internal server error" });
     } else {
       const users = JSON.parse(data);
-      const newUser = { ...user, id: users.length + 1 };
+      const newUser = { ...parsedUser, id: users.length + 1 };
       users.push(newUser);
       fs.writeFile("./users.json", JSON.stringify(users), (err) => {
         if (err) {
