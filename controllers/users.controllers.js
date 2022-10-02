@@ -107,7 +107,7 @@ module.exports.updateUser = (req, res, next) => {
 module.exports.bulkUpdate = (req, res, next) => {
   const usersInfo = req.body;
 
-  if (!Array.isArray(usersInfo)) {
+  if (!usersInfo || !Array.isArray(usersInfo)) {
     res.status(400).send({ success: false, message: "Invalid body input." });
   } else {
     fs.readFile("./users.json", (err, data) => {
