@@ -57,16 +57,30 @@ router
 router
   /**
    * @api {patch}
-   * @apiDescription Update a user
+   * @apiDescription Update multiple users info
    *
-   * @apiBody  {id: integer, key: value}
+   * @apiBody  [{id: integer, key: value},{id: integer, key: value}, {id: integer, key: value}]
    *
    * @apiSuccess {success: true, message: ""}
    *
    * @apiErr {success:false, message: "Internal Error"}
-   * @apiErr {success:false, message: "Invalid user id"}
+   * @apiErr {success:false, message: "Invalid body input"}
    */
   .patch("/bulk-update", userControllers.bulkUpdate);
+
+router
+  /**
+   * @api {patch}
+   * @apiDescription Update multiple users info
+   *
+   * @apiBody  [{id: integer, key: value},{id: integer, key: value}, {id: integer, key: value}]
+   *
+   * @apiSuccess {success: true, message: ""}
+   *
+   * @apiErr {success:false, message: "Internal Error"}
+   * @apiErr {success:false, message: "Invalid body input"}
+   */
+  .delete("/delete", userControllers.deleteUser);
 
 module.exports = router;
 

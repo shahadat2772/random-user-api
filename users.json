@@ -78,29 +78,5 @@
     "contact": "01833778123",
     "address": "Dhaka, Bangladesh",
     "photoUrl": "https://randomuser.me/api/portraits/men/12.jpg"
-  },
-  {
-    "id": 11,
-    "gender": "male",
-    "name": "Md Sujon",
-    "contact": "01803448129",
-    "address": "Dhaka, Bangladesh",
-    "photoUrl": "https://randomuser.me/api/portraits/men/9.jpg"
-  },
-  {
-    "id": 12,
-    "gender": "male",
-    "name": "Marufa",
-    "contact": "01803448129",
-    "address": "Dhaka, Bangladesh",
-    "photoUrl": "https://randomuser.me/api/portraits/men/9.jpg"
-  },
-  {
-    "id": 13,
-    "gender": "male",
-    "name": "Sujon Hossain",
-    "contact": "01803448129",
-    "address": "Dhaka, Bangladesh",
-    "photoUrl": "https://randomuser.me/api/portraits/men/9.jpg"
   }
 ]

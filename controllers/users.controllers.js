@@ -144,3 +144,37 @@ module.exports.bulkUpdate = (req, res, next) => {
     });
   }
 };
+
+module.exports.deleteUser = (req, res, next) => {
+  const { id } = req.body;
+
+  if (isNaN(id)) {
+    res.status(400).send({ success: false, message: "Invalid id user id" });
+  }
+
+  fs.readFile("./users.json", (err, data) => {
+    if (err) {
+      res.status(500).send({ success: false, message: "" });
+    } else {
+      const users = JSON.parse(data);
+
+      const targetUser = users.find((usr) => usr.id == id);
+      if (!targetUser) {
+        res.status(400).send({ success: false, message: "Invalid id user id" });
+      }
+      const newUsers = users.filter((user) => user.id != id);
+
+      fs.writeFile("./users.json", JSON.stringify(newUsers), (err) => {
+        if (err) {
+          res
+            .status(500)
+            .send({ success: false, message: "Internal server error." });
+        } else {
+          res
+            .status(200)
+            .send({ success: true, message: "Successfully deleted the user." });
+        }
+      });
+    }
+  });
+};
