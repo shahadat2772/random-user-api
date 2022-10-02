@@ -2,16 +2,14 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const PORT = process.env.PORT || 5000;
-const fs = require("fs");
+const userRoutes = require("./routes/v1/users.routes");
 
 // middleware
 app.use(express.json());
 app.use(cors());
 
 // routes
-fs.readFile("./users.json", (err, data) => {
-  console.log(JSON.parse(data));
-});
+app.use("/api/v1/user", userRoutes);
 
 // APIs
 app.get("/", (req, res) => {
