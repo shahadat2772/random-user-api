@@ -27,6 +27,21 @@ router
 
 module.exports = router;
 
+router
+  /**
+   * @api {post}
+   * @apiDescription Add a new user
+   *
+   * @apiBody  {"id": integer, "gender": "","name": "", "contact": "","address": "","photoUrl": ""}
+   *
+   * @apiSuccess {success: true, message:""}
+   *
+   * @apiErr {success:false, message: "Internal Error"}
+   */
+  .get("/save", userControllers.saveUser);
+
+module.exports = router;
+
 /**
  * @api {post} / tools save a tool
  * @apiDescription Get all the tools

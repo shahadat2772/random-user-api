@@ -37,3 +37,27 @@ module.exports.getAllUsers = (req, res, next) => {
     }
   });
 };
+
+module.exports.saveUser = (req, res, next) => {
+  const user = req.body;
+  fs.readFile("./users.json", (err, data) => {
+    if (err) {
+      res
+        .status(500)
+        .send({ success: false, message: "Internal server error" });
+    } else {
+      const users = JSON.parse(data);
+      const newUser = { ...user, id: users.length + 1 };
+      users.push(newUser);
+      fs.writeFile("./users.json", JSON.stringify(users), (err) => {
+        if (err) {
+          res
+            .status(500)
+            .send({ success: false, message: "Internal server error" });
+        } else {
+          res.send({ success: true, message: "New user added successfully" });
+        }
+      });
+    }
+  });
+};
