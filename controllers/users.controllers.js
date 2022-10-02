@@ -41,7 +41,7 @@ module.exports.getAllUsers = (req, res, next) => {
       const limit = req.query?.limit;
       let users;
       if (limit) {
-        limitedUsers = foundUsers.splice(0, Number(limit));
+        users = foundUsers.splice(0, Number(limit));
       } else {
         users = foundUsers;
       }
