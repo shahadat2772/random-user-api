@@ -42,7 +42,7 @@ router
 
 router
   /**
-   * @api {post}
+   * @api {patch}
    * @apiDescription Update a user
    *
    * @apiBody  {id: integer, key: value}
@@ -56,7 +56,7 @@ router
 
 router
   /**
-   * @api {post}
+   * @api {patch}
    * @apiDescription Update a user
    *
    * @apiBody  {id: integer, key: value}
@@ -66,7 +66,7 @@ router
    * @apiErr {success:false, message: "Internal Error"}
    * @apiErr {success:false, message: "Invalid user id"}
    */
-  .patch("/update", userControllers.bulkUpdate);
+  .patch("/bulk-update", userControllers.bulkUpdate);
 
 module.exports = router;
 
